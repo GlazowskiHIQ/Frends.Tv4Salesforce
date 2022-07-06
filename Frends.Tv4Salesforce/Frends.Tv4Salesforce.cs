@@ -1,6 +1,16 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.CSharp; // You can remove this if you don't need dynamic type in .NET Standard frends Tasks
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #pragma warning disable 1591
 
@@ -8,32 +18,41 @@ namespace Frends.Tv4Salesforce
 {
     public static class BulkInsert
     {
+        private static readonly HttpClient client = new HttpClient();
+
         /// <summary>
         /// This is task
-        /// Documentation: https://github.com/CommunityHiQ/Frends.Tv4Salesforce
+        /// Documentation: https://github.com/GlazowskiHiQ/Frends.Tv4Salesforce
         /// </summary>
-        /// <param name="input">What to repeat.</param>
-        /// <param name="options">Define if repeated multiple times. </param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>{string Replication} </returns>
-        public static Result InsertSales(Parameters input, [PropertyTab] Options options, CancellationToken cancellationToken)
+        public static Result InsertSales(Parameters input, CancellationToken cancellationToken)
         {
-            var repeats = new string[options.Amount];
+            byte[] fileBytes = ReadBytesFrom(input.DirectoryCSV);
+            var freshJob = CreateJob(input.AuthToken, input.BaseDomainURL, input.CreateJobBody);
+            return null;
+        }
 
-            for (var i = 0; i < options.Amount; i++)
+        private static byte[] ReadBytesFrom(string directory)
+        {
+            return File.ReadAllBytes(directory);
+        }
+
+        private static async Task<JToken> CreateJob(string authToken, string domain, string creationBody)
+        {
+            client.DefaultRequestHeaders.Add("Authorization", authToken);
+
+            var request = new HttpRequestMessage
             {
-                // It is good to check the cancellation token somewhere you spend lot of time, e.g. in loops.
-                cancellationToken.ThrowIfCancellationRequested();
-
-                repeats[i] = input.Message;
-            }
-
-            var output = new Result
-            {
-                Replication = string.Join(options.Delimiter, repeats)
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(domain),
+                Content = new StringContent(creationBody, Encoding.UTF8, "application/json")
             };
 
-            return output;
+            var response = await client.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JToken.Parse(responseBody);
         }
+
     }
 }

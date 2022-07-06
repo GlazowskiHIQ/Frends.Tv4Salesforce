@@ -5,11 +5,13 @@
     <authors>HiQPoland</authors>
     <copyright>HiQPoland</copyright>
     <PackageLicenseExpression>UNLICENSED</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/CommunityHiQ/Frends.Tv4Salesforce</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/GlazowskiHiQ/Frends.Tv4Salesforce</PackageProjectUrl>
     <IncludeSource>true</IncludeSource>
     <PackageTags>Frends</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>0.0.1</Version>
+	  	<BaseOutputPath>C:\Users\Mikołaj\Desktop\Task Packages\$(AssemblyName)\$(Version)</BaseOutputPath>
+	          
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 

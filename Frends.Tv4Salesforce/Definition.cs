@@ -11,30 +11,28 @@ namespace Frends.Tv4Salesforce
     public class Parameters
     {
         /// <summary>
-        /// Something that will be repeated.
+        /// Directory of CSV file to be sent to Tv4Salesforce
         /// </summary>
-        [DisplayFormat(DataFormatString = "Text")]
-        [DefaultValue("Lorem ipsum dolor sit amet.")]
-        public string Message { get; set; }
-    }
-
-    /// <summary>
-    /// Options class provides additional optional parameters.
-    /// </summary>
-    public class Options
-    {
-        /// <summary>
-        /// Number of times input is repeated.
-        /// </summary>
-        [DefaultValue(3)]
-        public int Amount { get; set; }
+        [DisplayFormat(DataFormatString = "Expression")]
+        public string DirectoryCSV { get; set; }
 
         /// <summary>
-        /// How repeats of the input are separated.
+        /// Base domain URL used to send requests to Tv4Salesforce
         /// </summary>
-        [DisplayFormat(DataFormatString = "Text")]
-        [DefaultValue(" ")]
-        public string Delimiter { get; set; }
+        [DisplayFormat(DataFormatString = "Expression")]
+        public string BaseDomainURL { get; set; } 
+
+        /// <summary>
+        /// Authorization token 
+        /// </summary>
+        [DisplayFormat(DataFormatString = "Expression")]
+        public string AuthToken { get; set; }
+
+        /// <summary>
+        /// Body describing job settings
+        /// </summary>
+        [DisplayFormat(DataFormatString = "Expression")]
+        public string CreateJobBody { get; set; }
     }
 
     public class Result
