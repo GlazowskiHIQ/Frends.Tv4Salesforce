@@ -43,4 +43,10 @@ namespace Frends.Tv4Salesforce
         [DisplayFormat(DataFormatString = "Text")]
         public string Replication;
     }
+
+    public class JobResult
+    {
+        public int StatusCode { get; set; }
+        public string HttpResultBody { get; set; }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿{
 	"Tasks": [
 		{
-			"TaskMethod": "Frends.Tv4Salesforce.BulkInsert.InsertSales"
+			"TaskMethod": "Frends.Tv4Salesforce.BulkJob.Sales"
 		}
 	]
 }
