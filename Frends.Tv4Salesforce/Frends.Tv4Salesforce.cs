@@ -26,8 +26,12 @@ namespace Frends.Tv4Salesforce
         /// </summary>
         public static async Task<Result> Sales(Parameters input, CancellationToken cancellationToken)
         {
+            client.DefaultRequestHeaders.Add("Authorization", input.AuthToken);
+
             byte[] fileBytes = ReadBytesFrom(input.DirectoryCSV);
-            await JobOperation(OperationType.CREATE_JOB, input.AuthToken, input.BaseDomainURL, input.CreateJobBody);
+            JobResult creationResult = await JobOperation(OperationType.CREATE_JOB, input.BaseDomainURL, input.CreateJobBody);
+            JToken creationResultBody = JToken.Parse(creationResult.HttpResultBody);
+            await JobOperation(OperationType.PUT_CSV, input.BaseDomainURL, contentUrl: creationResultBody["contentUrl"].ToString(), byteContent: fileBytes);
             return null;
         }
 
@@ -43,14 +47,12 @@ namespace Frends.Tv4Salesforce
 
         private static async Task<JobResult> JobOperation
             (OperationType operation, 
-            string authToken, 
             string domain, 
             string creationBody = null, 
             string contentUrl = null, 
             byte[] byteContent = null, 
             string jobId = null)
         {
-            client.DefaultRequestHeaders.Add("Authorization", authToken);
 
             var request = new HttpRequestMessage { };
 
