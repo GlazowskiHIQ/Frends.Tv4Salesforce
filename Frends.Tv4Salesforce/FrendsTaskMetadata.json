@@ -1,7 +1,7 @@
 ﻿{
 	"Tasks": [
 		{
-			"TaskMethod": "Frends.Tv4Salesforce.BulkJob.Sales"
+			"TaskMethod": "MTV.Tv4Salesforce.BulkJob.SendBulkDataAsBytes"
 		}
 	]
 }

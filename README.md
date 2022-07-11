@@ -6,10 +6,9 @@ frends Community Task for BulkInsert
 
 - [Installing](#installing)
 - [Tasks](#tasks)
-     - [BulkInsert](#BulkInsert)
+     - [SendBulkDataAsBytes](#SendBulkDataAsBytes)
 - [Building](#building)
 - [Contributing](#contributing)
-- [Change Log](#change-log)
 
 # Installing
 
@@ -18,35 +17,27 @@ https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view i
 
 # Tasks
 
-## BulkInsert
+## SendBulkDataAsBytes
 
-Repeats a message
+This Frends task performs insert/upsert of bulk data from CSV file. It hadles Salesforces bulk job from creation to closing.
 
 ### Properties
 
 | Property | Type | Description | Example |
 | -------- | -------- | -------- | -------- |
-| Message | `string` | Some string that will be repeated. | `foo` |
+| DirectoryCSV | `string` | Directory of CSV file to be sent to Tv4Salesforce  | `C:\` |
+| BaseDomainURL | `string` | Base domain URL used to send requests to Tv4Salesforce | `https://example-domain.salesforce.com` |
+| AuthToken | `string` | Authorization token | ` Bearer 1234567890abcdefghijklmnopqrstuvwxyz` |
+| CreateJobBody | `string` | Body describing job settings | `"{\"object\" : \"example_entity\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\" : \"CRLF\"}"` |
 
-### Options
-
-| Property | Type | Description | Example |
-| -------- | -------- | -------- | -------- |
-| Amount | `int` | Amount how many times message is repeated. | `3` |
-| Delimiter | `string` | Character(s) used between replications. | `, ` |
 
 ### Returns
 
-A result object with parameters.
+A result is json serialization of object with parameters.
 
 | Property | Type | Description | Example |
 | -------- | -------- | -------- | -------- |
-| Replication | `string` | Repeated string. | `foo, foo, foo` |
-
-Usage:
-To fetch result use syntax:
-
-`#result.Replication`
+| HttpResultBody | `string` | Body containing information of finished job | `` |
 
 # Building
 
@@ -57,10 +48,6 @@ Clone a copy of the repository
 Rebuild the project
 
 `dotnet build`
-
-Run tests
-
-`dotnet test`
 
 Create a NuGet package
 
@@ -77,8 +64,3 @@ When contributing to this repository, please first discuss the change you wish t
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
-# Change Log
-
-| Version | Changes |
-| ------- | ------- |
-| 0.0.1   | Development still going on |

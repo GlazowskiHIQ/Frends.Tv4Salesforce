@@ -3,7 +3,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Frends.Tv4Salesforce
+namespace MTV.Tv4Salesforce
 {
     /// <summary>
     /// Parameters class usually contains parameters that are required.
@@ -33,15 +33,6 @@ namespace Frends.Tv4Salesforce
         /// </summary>
         [DisplayFormat(DataFormatString = "Expression")]
         public string CreateJobBody { get; set; }
-    }
-
-    public class Result
-    {
-        /// <summary>
-        /// Contains the input repeated the specified number of times.
-        /// </summary>
-        [DisplayFormat(DataFormatString = "Text")]
-        public string Replication;
     }
 
     public class JobResult

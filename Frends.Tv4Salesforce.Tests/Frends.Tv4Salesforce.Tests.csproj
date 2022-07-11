@@ -13,10 +13,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Frends.Tv4Salesforce\Frends.Tv4Salesforce.csproj" />
+    <ProjectReference Include="..\Frends.Tv4Salesforce\MTV.Tv4Salesforce.csproj" />
   </ItemGroup>
 
 </Project>
